@@ -124,12 +124,12 @@ $hero = $pdo->query("SELECT * FROM videos ORDER BY created_at DESC LIMIT 1")->fe
         /* ── HERO ── */
         .hero {
             position: relative;
-            height: 88vh;
-            min-height: 520px;
-            display: flex;
-            align-items: flex-end;
-            padding: 0 48px 60px;
-            overflow: hidden;
+    height: 88vh;
+    min-height: 520px;
+    display: flex;
+    align-items: flex-start;
+    padding: 80px 48px 60px;
+    overflow: hidden;
         }
         .hero-bg {
             position: absolute;
@@ -184,9 +184,10 @@ $hero = $pdo->query("SELECT * FROM videos ORDER BY created_at DESC LIMIT 1")->fe
         }
 
         .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 600px;
+           position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 100%;
         }
         .hero-badge {
             display: inline-flex;
@@ -505,21 +506,28 @@ $hero = $pdo->query("SELECT * FROM videos ORDER BY created_at DESC LIMIT 1")->fe
     <div class="hero-gradient"></div>
     <div class="hero-content">
         <div class="hero-badge"><i class='bx bx-trending-up'></i> Now Streaming</div>
+        <?php if ($hero): ?>
+        <video  autoplay muted controls style="width:100%; border-radius:16px; margin-bottom:20px; max-height:340px; object-fit:cover; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+            <source src="uploads/<?= htmlspecialchars($hero['filename']) ?>" type="video/mp4">
+        </video>
+        <h1 class="hero-title"><?= htmlspecialchars($hero['title']) ?></h1>
+        <p class="hero-desc"><?= htmlspecialchars($hero['description']) ?></p>
+        <?php else: ?>
         <h1 class="hero-title">
-             College's<br>
+            College's<br>
             <span>Sports & Esports</span><br>
             Hub
         </h1>
         <p class="hero-desc">
             Watch live tournaments, match highlights, esports battles and college sports events — all in one place.
         </p>
+        <?php endif; ?>
         <div class="hero-btns">
             <a href="#sports" class="btn-play"><i class='bx bx-play'></i> Start Watching</a>
             <a href="#tournament" class="btn-outline"><i class='bx bx-trophy'></i> Tournaments</a>
         </div>
     </div>
 </div>
-
 <!-- Content -->
 <div class="content">
 
